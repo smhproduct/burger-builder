@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, CardBody, CardHeader, CardFooter } from 'reactstrap';
+import { Card, CardBody, CardFooter, CardHeader, Button } from 'reactstrap';
 
 const controls = [
     { label: 'Salad', type: 'salad' },
@@ -44,7 +44,8 @@ const Controls = props => {
                     <ResetBuild reset={() => props.ingredientReset()} />
 
                 </CardBody>
-                <CardFooter><h5>Price: BDT</h5></CardFooter>
+                <CardFooter><h5>Price: BDT <strong>{props.price}</strong></h5></CardFooter>
+                <Button disabled={!props.purchasable} onClick={props.toggleModal}>Order Now</Button>
             </Card>
         </div>
     )
