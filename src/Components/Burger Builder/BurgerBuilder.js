@@ -83,6 +83,18 @@ export default class BurgerBuilder extends Component {
             modalOpen: !this.state.modalOpen
         })
     }
+
+    handleCheckout = () => {
+        this.props.history.push('/checkout');
+    }
+
+    /* componentDidMount() {
+        this.props.history.push('/checkout')
+    } */
+    //ETA ami rekhe disi commentout kore, karon history.push() eta ashole route er karone ashche, je compo ke route e rakha hoi or moddhe builtin kichu functionality ashe jeta amra ei compodidmount diye check korte pari
+    //ei method handlecheckout e apply korsi
+    //IMPORTANT jokhon ami kono ekta component e ekta activity ba click er maddhome arekta compo te jete chai, tokhon ei method apply kora hoi, e.g: continue to checkout' e click korle amake checkout navlink e niye jabe 
+
     render() {
         return (
             <div>
@@ -103,7 +115,7 @@ export default class BurgerBuilder extends Component {
                         <Summary ingredients={this.state.ingredients} />
                     </ModalBody>
                     <ModalFooter>
-                        <Button color="success" onClick={this.toggleModal}>Continue to Checkout</Button>
+                        <Button color="success" onClick={this.handleCheckout}>Continue to Checkout</Button>
                         <Button color="secondary" onClick={this.toggleModal}>Cancel</Button>
                     </ModalFooter>
                 </Modal>
