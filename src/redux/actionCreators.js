@@ -14,10 +14,9 @@ export const removeIngredient = igtype => {
     }
 }
 
-export const resetIngredient = igtype => {
+export const resetIngredient = () => {
     return {
         type: actionTypes.RESET_INGREDIENT,
-        payload: igtype
     }
 }
 

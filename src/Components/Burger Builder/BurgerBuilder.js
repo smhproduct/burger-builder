@@ -18,8 +18,8 @@ const mapDispatchToProps = dispatch => {
     return {
         addIngredient: (igtype) => dispatch(addIngredient(igtype)),
         removeIngredient: (igtype) => dispatch(removeIngredient(igtype)),
-        resetIngredient: (igtype) => dispatch(resetIngredient(igtype)),
-        updatePurchasable: (igtype) => dispatch(updatePurchasable())
+        resetIngredient: () => dispatch(resetIngredient()),
+        updatePurchasable: () => dispatch(updatePurchasable())
     }
 }
 

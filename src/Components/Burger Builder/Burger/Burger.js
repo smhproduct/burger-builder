@@ -12,7 +12,7 @@ const Burger = props => {
         .reduce((arr, element) => {
             return arr.concat(element)
         }, [])
-
+    console.log(ingredientArr);
     /*.reduce() likhsi ekdom ingredienArr er () jokhon end hoise tokhon, means  reduce() is a function of ingredArr
      Ei func duita value ne, notice, first value ta ekta function that itself takes 2 parameters(arr, element) & 2nd param is empty []
      **1st param**
