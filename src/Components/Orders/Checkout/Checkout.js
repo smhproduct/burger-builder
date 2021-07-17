@@ -35,6 +35,7 @@ class Checkout extends Component {
         this.props.history.goBack("/");
     }
 
+
     inputChangerHandler = (e) => {
         this.setState({
             values: {
@@ -115,6 +116,8 @@ class Checkout extends Component {
         return (
             <div>
                 {this.state.isLoading ? <Spinner /> : form}
+
+                {/* THE BELOW MODAL WILL SHOW ONLY WHEN THERE IS ANY ERROR FROM SERVER */}
                 <Modal isOpen={this.state.isModalOpen} onClick={this.goBack}>
                     <ModalBody>
                         <p>{this.state.modalMsg}</p>

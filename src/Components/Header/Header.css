@@ -20,9 +20,11 @@
 
 .NavLink:hover {
     color: wheat;
+
 }
 
 .active {
     text-shadow: 5 px 5px grey;
+    border-bottom: 5px solid wheat;
     color: wheat;
 }
