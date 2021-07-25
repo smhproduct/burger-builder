@@ -59,6 +59,7 @@ export const reducer = (state = INITIAL_STATE, action) => {
                 ...state,
                 ingredients: ingredients,
                 totalPrice: 80,
+                purchasable: false
             }
 
         case actionTypes.UPDATE_PURCHASABLE:
