@@ -13,6 +13,7 @@ const Order = props => {
             </span>
         )
     })
+
     return (
         <div style={{
             border: '1px solid grey',
