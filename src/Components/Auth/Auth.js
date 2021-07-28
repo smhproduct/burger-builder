@@ -4,6 +4,13 @@ import { Formik } from 'formik';
 class Auth extends Component {
     state = {
         disableConfirmPassword: true,
+        mode: 'Sign Up'
+    }
+
+    switchModeHandler = () => {
+        this.setState({
+            mode: this.state.mode === "Sign Up" ? "Login" : "Sign Up"
+        })
     }
     render() {
         return (
@@ -47,19 +54,28 @@ class Auth extends Component {
                                 disableConfirmPassword: false
                             })
 
-                            if (!values.passwordConfirm) {
-                                errors.passwordConfirm = 'Required';
-                                return errors;
-                            } else if (values.password !== values.passwordConfirm) {
-                                errors.passwordConfirm = 'Password field does not match!';
-                                return errors;
+                            if (this.state.mode === "Sign Up") {
+                                if (!values.passwordConfirm) {
+                                    errors.passwordConfirm = 'Required';
+                                    return errors;
+                                } else if (values.password !== values.passwordConfirm) {
+                                    errors.passwordConfirm = 'Password field does not match!';
+                                    return errors;
+                                }
                             }
+
+
                             //console.log(errors);
 
                         }}
                 >
                     {({ values, handleChange, handleSubmit, errors }) => (
                         <div style={{ border: '1px gray solid', padding: '15px', borderRadius: '7px' }}>
+                            <button style={{
+                                width: '100%',
+                                backgroundColor: '#d70f64',
+                                color: 'white'
+                            }} className="btn btn-lg" onClick={this.switchModeHandler}>Switch to {this.state.mode === 'Sign Up' ? "Login" : "Sign Up"}</button><br /><br />
                             <form onSubmit={handleSubmit}>
                                 <input
                                     name="email"
@@ -80,18 +96,21 @@ class Auth extends Component {
                                 />
                                 <span style={{ color: 'red' }}>{errors.password}</span>
                                 <br />
-                                <input
-                                    type='password'
-                                    name="passwordConfirm"
-                                    placeholder="Confirm Password"
-                                    className="form-control"
-                                    value={values.passwordConfirm}
-                                    onChange={handleChange}
-                                    disabled={this.state.disableConfirmPassword}
-                                />
-                                <span style={{ color: 'red' }}>{errors.passwordConfirm}</span>
-                                <br />
-                                <button type="submit" className="btn btn-success">Sign Up</button>
+                                {this.state.mode === "Sign Up" ? <div>
+                                    <input
+                                        type='password'
+                                        name="passwordConfirm"
+                                        placeholder="Confirm Password"
+                                        className="form-control"
+                                        value={values.passwordConfirm}
+                                        onChange={handleChange}
+                                        disabled={this.state.disableConfirmPassword}
+                                    />
+                                    <span style={{ color: 'red' }}>{errors.passwordConfirm}</span>
+                                    <br />
+                                </div> : null}
+
+                                <button type="submit" className="btn btn-success">{this.state.mode === "Sign Up" ? "Sign Up" : "Login"}</button>
                             </form>
                         </div>)}
                 </Formik>
