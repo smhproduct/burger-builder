@@ -1,5 +1,13 @@
 import React, { Component } from 'react';
 import { Formik } from 'formik';
+import { auth } from '../../redux/authActionCreators';
+import { connect } from 'react-redux';
+
+const mapDispatchToProps = dispatch => {
+    return {
+        auth: (email, password, mode) => dispatch(auth(email, password, mode))
+    }
+}
 
 class Auth extends Component {
     state = {
@@ -26,8 +34,9 @@ class Auth extends Component {
 
                     onSubmit={
                         (values) => {
-                            console.log(values);
+                            this.props.auth(values.email, values.password, this.state.mode);
                         }
+
                     }
 
                     validate={
@@ -47,8 +56,8 @@ class Auth extends Component {
                                     disableConfirmPassword: true
                                 })
                                 return errors;
-                            } else if (values.password.length < 4) {
-                                errors.password = 'Must be atleast 4 characters!';
+                            } else if (values.password.length < 6) {
+                                errors.password = 'Must be atleast 6 characters!';
                                 return errors;
                             } else this.setState({
                                 disableConfirmPassword: false
@@ -71,11 +80,8 @@ class Auth extends Component {
                 >
                     {({ values, handleChange, handleSubmit, errors }) => (
                         <div style={{ border: '1px gray solid', padding: '15px', borderRadius: '7px' }}>
-                            <button style={{
-                                width: '100%',
-                                backgroundColor: '#d70f64',
-                                color: 'white'
-                            }} className="btn btn-lg" onClick={this.switchModeHandler}>Switch to {this.state.mode === 'Sign Up' ? "Login" : "Sign Up"}</button><br /><br />
+                            <div style={{ color: '#d70f64', fontSize: 'x-large', marginLeft: '10px', fontWeight: '500' }}>{this.state.mode === "Sign Up" ? "Sign Up" : "Login"}</div>
+                            <br />
                             <form onSubmit={handleSubmit}>
                                 <input
                                     name="email"
@@ -109,8 +115,14 @@ class Auth extends Component {
                                     <span style={{ color: 'red' }}>{errors.passwordConfirm}</span>
                                     <br />
                                 </div> : null}
-
-                                <button type="submit" className="btn btn-success">{this.state.mode === "Sign Up" ? "Sign Up" : "Login"}</button>
+                                <span>
+                                    <button type="submit" style={{ backgroundColor: '#d70f64', color: "white" }} className="btn">{this.state.mode === "Sign Up" ? "Sign Up" : "Login"}</button>
+                                    <button type="button" style={{
+                                        marginLeft: '10px',
+                                        backgroundColor: '#ededed',
+                                        color: '#d70f64'
+                                    }} className="btn " onClick={this.switchModeHandler}>Switch to {this.state.mode === 'Sign Up' ? "Login" : "Sign Up"}</button>
+                                </span>
                             </form>
                         </div>)}
                 </Formik>
@@ -119,4 +131,4 @@ class Auth extends Component {
     }
 }
 
-export default Auth;
+export default connect(null, mapDispatchToProps)(Auth);
