@@ -8,6 +8,8 @@ import { Redirect, Route, Switch } from 'react-router-dom';//IMPORTANT:: auto im
 import { connect } from 'react-redux';
 import { authCheck } from '../redux/authActionCreators';
 import { Component } from 'react';
+import { logout } from '../redux/authActionCreators';
+import Logout from './Auth/Logout';
 
 const mapStateToProps = state => {
     return {
@@ -40,6 +42,7 @@ class Main extends Component {
             routes = (<Switch>
                 <Route path='/orders' component={Orders} />
                 <Route path='/checkout' component={Checkout} />
+                <Route path='/logout' component={Logout} />
                 <Route path='/' exact component={BurgerBuilder} />
                 <Redirect to='/' />
             </Switch>)
